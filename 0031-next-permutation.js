@@ -1,4 +1,5 @@
 /**
+ * My solution
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
@@ -33,3 +34,12 @@ var nextPermutation = function (nums) {
   nums.sort((a, b) => a - b);
   return;
 };
+
+// My solution is similar to the one on leetcode
+// things that could've been done better
+/**
+ * Use a helper function for finding the next largest number to swap with
+ * use a helper function to sort the rightmost elements in place instead of using splice
+ *  this would prevent code duplication at the end of the solution function
+ *  this would also reduce the multiple returns
+ */
