@@ -7,24 +7,32 @@ var nextPermutation = function (nums) {
 
   // go through every element of nums from highest index to lowest
   for (let i = nums.length; i >= 0; i--) {
-    // if current element is greater than next element
-    if (nums[i] > nums[i - 1]) {
-      console.log("current num:", nums[i]);
-      console.log("next num:", nums[i - 1]);
-
+    // if current element is less than previous element
+    if (nums[i] < nums[i + 1]) {
       // move the current element to the left in the array
-      const temp = nums[i - 1];
-      nums[i - 1] = nums[i];
-      nums[i] = temp;
+      // this logic is currently incorrect
+      // const temp = nums[i - 1];
+      // nums[i - 1] = nums[i];
+      // nums[i] = temp;
 
-      // then sort elements to the right of the array in ascending order
-      let sorted = nums.splice(i);
-      console.log("subarray to be sorted:", sorted);
+      // loop through nums again in reverse order
+      for (let j = nums.length; j >= 0; j--) {
+        // if current element in inner loop is greater then current element in outer loop
+        if (nums[j] > nums[i]) {
+          // move inner loop element to index of outer loop element
+          console.log("nums[i]", nums[i]);
+          console.log("nums[j]", nums[j]);
+          const temp = nums[i];
+          nums[i] = nums[j];
+          nums[j] = temp;
+          break;
+        }
+      }
 
+      // then sort elements to the right in the array in ascending order
+      let sorted = nums.splice(i + 1);
       sorted.sort((a, b) => a - b);
-      console.log("sorted subarray:", ...sorted);
-
-      nums.splice(i, 0, sorted);
+      nums.splice(i + 1, 0, ...sorted);
 
       return;
     }
